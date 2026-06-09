@@ -76,7 +76,6 @@ fun MainScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Spacer(modifier = Modifier.height(20.dp))
 
             Button(
                 onClick = {
@@ -109,7 +108,9 @@ fun MainScreen(
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surface
                     ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 8.dp
+                    )
                 ) {
                     Column(
                         modifier = Modifier
@@ -117,78 +118,23 @@ fun MainScreen(
                             .padding(28.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .size(120.dp)
-                                .background(
-                                    color = MaterialTheme.colorScheme.primaryContainer,
-                                    shape = RoundedCornerShape(30.dp)
-                                )
-                                .padding(16.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Image(
-                                painter = painterResource(Res.drawable.compose_multiplatform),
-                                contentDescription = "Compose Logo",
-                                modifier = Modifier.fillMaxSize(),
-                                contentScale = ContentScale.Fit
-                            )
-                        }
+                        Image(painterResource(Res.drawable.compose_multiplatform), null)
 
                         Spacer(modifier = Modifier.height(24.dp))
 
                         Text(
-                            text = "Інформація про систему",
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 22.sp
-                            ),
-                            color = MaterialTheme.colorScheme.onSurface,
-                            textAlign = TextAlign.Center
+                            text = "Поточна Платформа:",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary
                         )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Дані отримані через Koin",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                            textAlign = TextAlign.Center
+                            text = platformInfo.ifEmpty { "Завантаження..." },
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontWeight = FontWeight.SemiBold
+                            ),
+                            color = MaterialTheme.colorScheme.onSurface
                         )
-
-                        Spacer(modifier = Modifier.height(20.dp))
-
-                        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-
-                        Spacer(modifier = Modifier.height(20.dp))
-
-                        // Платформа з ViewModel
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(
-                                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f),
-                                    shape = RoundedCornerShape(16.dp)
-                                )
-                                .padding(16.dp)
-                        ) {
-                            Text(
-                                text = "Поточна Платформа:",
-                                style = MaterialTheme.typography.labelLarge,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = platformInfo.ifEmpty { "Завантаження..." },
-                                style = MaterialTheme.typography.bodyLarge.copy(
-                                    fontWeight = FontWeight.SemiBold
-                                ),
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
                     }
                 }
             }
