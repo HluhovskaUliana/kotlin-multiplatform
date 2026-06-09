@@ -23,10 +23,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import co.touchlab.kermit.Logger
 import com.hluhovska.myapplication.AppTheme.AppTheme
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.compose_multiplatform
 
@@ -45,7 +45,7 @@ fun App() {
 
 @Composable
 fun MainScreen(
-    aboutViewModel: AboutViewModel = viewModel { AboutViewModel() }
+    aboutViewModel: AboutViewModel = koinViewModel()
 ) {
     var showContent by remember { mutableStateOf(false) }
     val platformInfo by aboutViewModel.platformInfo.collectAsState()
@@ -96,8 +96,10 @@ fun MainScreen(
 
             AnimatedVisibility(
                 visible = showContent,
-                enter = fadeIn(animationSpec = tween(500)) + slideInVertically(initialOffsetY = { -it / 5 }, animationSpec = tween(500)),
-                exit = fadeOut(animationSpec = tween(500)) + slideOutVertically(targetOffsetY = { -it / 5 }, animationSpec = tween(500))
+                enter = fadeIn(animationSpec = tween(500)) +
+                        slideInVertically(initialOffsetY = { -it / 5 }, animationSpec = tween(500)),
+                exit = fadeOut(animationSpec = tween(500)) +
+                        slideOutVertically(targetOffsetY = { -it / 5 }, animationSpec = tween(500))
             ) {
                 Card(
                     modifier = Modifier
@@ -107,9 +109,7 @@ fun MainScreen(
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surface
                     ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 8.dp
-                    )
+                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
                 ) {
                     Column(
                         modifier = Modifier
@@ -150,7 +150,7 @@ fun MainScreen(
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(
-                            text = "Дані отримані з ViewModel",
+                            text = "Дані отримані через Koin",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                             textAlign = TextAlign.Center
@@ -162,7 +162,7 @@ fun MainScreen(
 
                         Spacer(modifier = Modifier.height(20.dp))
 
-                        // Платформа
+                        // Платформа з ViewModel
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -188,6 +188,7 @@ fun MainScreen(
                         }
 
                         Spacer(modifier = Modifier.height(16.dp))
+
                     }
                 }
             }
