@@ -1,13 +1,14 @@
-package com.hluhovska.myapplication
+package com.hluhovska.myapplication.ui
 
 import androidx.lifecycle.ViewModel
 import co.touchlab.kermit.Logger
+import com.hluhovska.myapplication.data.about.AboutRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class AboutViewModel(
-    private val repository: PlatformRepository
+    private val repository: AboutRepository
 ) : ViewModel() {
 
     private val _platformInfo = MutableStateFlow("")
@@ -15,6 +16,6 @@ class AboutViewModel(
 
     init {
         _platformInfo.value = repository.getPlatformName()
-        Logger.i(tag = "MMP_LAB") { "AboutViewModel створено через Koin! Платформа: ${_platformInfo.value}" }
+        Logger.Companion.i(tag = "MMP_LAB") { "AboutViewModel створено через Koin! Платформа: ${_platformInfo.value}" }
     }
 }

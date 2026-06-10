@@ -1,5 +1,6 @@
-package com.hluhovska.myapplication
+package com.hluhovska.myapplication.data.about
 
+import com.hluhovska.myapplication.data.about.Platform
 import web.navigator.navigator
 
 class JsPlatform: Platform {

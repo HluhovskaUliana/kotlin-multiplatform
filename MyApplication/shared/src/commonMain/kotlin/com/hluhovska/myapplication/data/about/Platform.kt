@@ -1,4 +1,4 @@
-package com.hluhovska.myapplication
+package com.hluhovska.myapplication.data.about
 
 interface Platform {
     val name: String

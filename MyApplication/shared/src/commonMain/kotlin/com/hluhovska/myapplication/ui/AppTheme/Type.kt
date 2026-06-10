@@ -1,4 +1,4 @@
-package com.hluhovska.myapplication.AppTheme
+package com.hluhovska.myapplication.ui.AppTheme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable

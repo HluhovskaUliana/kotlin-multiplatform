@@ -1,7 +1,6 @@
-package com.hluhovska.myapplication
+package com.hluhovska.myapplication.data.about
 
-
-class PlatformRepository {
+class AboutRepository {
     fun getPlatformName(): String {
         return getPlatform().name
     }

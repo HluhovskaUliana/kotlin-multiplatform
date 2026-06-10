@@ -1,6 +1,7 @@
 package com.hluhovska.myapplication
 
 import android.app.Application
+import com.hluhovska.myapplication.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 

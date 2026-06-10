@@ -1,4 +1,4 @@
-package com.hluhovska.myapplication.AppTheme
+package com.hluhovska.myapplication.ui.AppTheme
 
 import androidx.compose.ui.graphics.Color
 
