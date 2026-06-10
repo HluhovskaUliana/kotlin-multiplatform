@@ -1,11 +1,11 @@
 package com.hluhovska.myapplication
 
-import com.hluhovska.myapplication.data.about.getPlatform
+import com.hluhovska.myapplication.data.about.Platform
 
 class Greeting {
-    private val platform = getPlatform()
+    private val platform = Platform()
 
     fun greet(): String {
-        return sayHello(platform.name)
+        return sayHello("${platform.osName} ${platform.osVersion}")
     }
 }

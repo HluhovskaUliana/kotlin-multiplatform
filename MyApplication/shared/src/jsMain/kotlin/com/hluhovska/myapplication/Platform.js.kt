@@ -1,15 +1,35 @@
 package com.hluhovska.myapplication.data.about
 
-import com.hluhovska.myapplication.data.about.Platform
-import web.navigator.navigator
+import co.touchlab.kermit.Logger
+import kotlinx.browser.window
+import kotlinx.browser.document
 
-class JsPlatform: Platform {
-    private val userAgent = navigator.userAgent
-    private val browserList = listOf("Chrome", "Firefox", "Safari", "Edge")
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+actual class Platform actual constructor() {
+    actual val osName: String
+        get() = "Web JS"
+    actual val osVersion: String
+        get() = window.navigator.userAgent
+    actual val deviceModel: String
+        get() = window.navigator.platform
+    actual val cpuType: String
+        get() = "Unknown"
+    actual val screen: ScreenInfo
+        get() = ScreenInfo()
 
-    override val name: String = userAgent.findAnyOf(browserList, ignoreCase = true)
-            ?.let { (startIndex) -> userAgent.substring(startIndex).substringBefore(" ") }
-            ?: "Unknown"
+    actual fun logSystemInfo() {
+        Logger.i(tag = "Platform") {
+            "OS: $osName $osVersion | Device: $deviceModel | CPU: $cpuType | Screen: ${screen.width}x${screen.height}"
+        }
+    }
 }
 
-actual fun getPlatform(): Platform = JsPlatform()
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+actual class ScreenInfo actual constructor() {
+    actual val width: Int
+        get() = window.screen.width
+    actual val height: Int
+        get() = window.screen.height
+    actual val density: Int?
+        get() = window.devicePixelRatio.toInt()
+}
